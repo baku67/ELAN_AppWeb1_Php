@@ -17,10 +17,20 @@
         // $quantity = $_POST["quantity"];
         $quantity = filter_input(INPUT_POST, "quantity", FILTER_VALIDATE_INT);
 
-        $newProduct = [$productName, $unitPrice, $quantity];
-        $_SESSION["user"]= $newProduct;
-        echo implode($_SESSION["user"]);
+
+        $newProduct = [
+            "productName" => $productName,
+            "unitPrice" => $unitPrice, 
+            "quantity" => $quantity,
+            "total" => ($quantity*$unitPrice)
+        ];
+        $_SESSION["product"][] = $newProduct;
+
+        // Test affichage d'une caractéristique du produit
+        // echo $_SESSION["user"]["productName"] . "<br>";
     
+        // echo print_r($_SESSION["user"]) . "<br><br>";
+        // var_dump($_SESSION["user"]);
     }
 
-    header("Location:index.php");
+    header("Location:recap.php");
