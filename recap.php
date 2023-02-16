@@ -8,14 +8,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Récap des produits</title>
+        <link rel="stylesheet" href="style.css">
     </head>
 
     <body>
         <?php
-            echo "Affichage variable \$_SESSION['product']<br>";
-            echo print_r($_SESSION["product"]) . "<br><br>";
-            var_dump($_SESSION["product"]);
-            echo "<br><br><br><br>";
+            // echo "Affichage variable \$_SESSION['product']<br>";
+            // echo print_r($_SESSION["product"]) . "<br><br>";
+            // var_dump($_SESSION["product"]);
+            // echo "<br><br><br><br>";
 
             if (!isset($_SESSION["product"]) || empty($_SESSION["product"])) {
                 echo "<p>Aucun produit en session...</p>";
@@ -56,6 +57,11 @@
 
             }
         ?>
+
+        <a href="traitement.php?action=clearShoppingCart">Vider le panier</a>
+
+
+        
     </body>
 </html>
 

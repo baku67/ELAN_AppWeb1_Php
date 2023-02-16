@@ -4,10 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>App Web 1</title>
+        <link rel="stylesheet" href="style.css">
     </head>
 
     <body>
-        <form method="post" action="traitement.php" style="display:flex; flex-direction:column; width:70vw; margin:0 auto;">
+        <form method="post" action="traitement.php?action=ajouterProduit" id="form">
             <label for="productName">Nom du produit:</label>
             <input id="productName" name="productName" type="text" required>
 
