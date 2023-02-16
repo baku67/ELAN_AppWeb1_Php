@@ -7,7 +7,16 @@
         <link rel="stylesheet" href="style.css">
     </head>
 
-    <body>
+    <body> 
+
+        <h1>Panier</h1><br>
+        <nav>
+            <ul id="navList">
+                <li class='activ'>Accueil</li>
+                <li><a href='recap.php'>Panier</a></li>
+            </ul>
+        </nav>
+
         <form method="post" action="traitement.php?action=ajouterProduit" id="form">
             <label for="productName">Nom du produit:</label>
             <input id="productName" name="productName" type="text" required>

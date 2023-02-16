@@ -12,7 +12,14 @@
     </head>
 
     <body>
-        <h1>Panier:</h1>
+        <h1>Panier</h1><br>
+        <nav>
+            <ul id="navList">
+                <li><a href='index.php'>Accueil</a></li>
+                <li class='activ'>Panier</li>
+            </ul>
+        </nav>
+
         <?php
             // echo "Affichage variable \$_SESSION['product']<br>";
             // echo print_r($_SESSION["product"]) . "<br><br>";
