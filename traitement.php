@@ -45,6 +45,13 @@
                 header("Location:recap.php");
                 
             break;
+
+            case "deleteProduct":
+                $index = $_GET["id"];
+                unset($_SESSION['product'][$index]);
+                
+                header("Location:recap.php");
+            break;
         }
 
     } else {

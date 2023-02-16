@@ -44,6 +44,8 @@
                             "<td>".number_format($product["unitPrice"], 2, ",", "&nbsp;")."&nbsp;€</td>",
                             "<td>".$product["quantity"]."</td>",
                             "<td>".number_format($product["total"], 2, ",", "&nbsp;")."&nbsp;€</td>",
+                            // Suppression d'un produit dans le panier:
+                            "<td><a href='traitement.php?action=deleteProduct&id=" . $index . "'>&times;</a></td>",
                         "</tr>";
                         $totalGeneral += $product["total"];
                     }
@@ -58,6 +60,7 @@
             }
         ?>
 
+        
         <a href="traitement.php?action=clearShoppingCart">Vider le panier</a>
 
 
