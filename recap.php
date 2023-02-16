@@ -45,7 +45,9 @@
                             "<td>".$product["quantity"]."</td>",
                             "<td>".number_format($product["total"], 2, ",", "&nbsp;")."&nbsp;€</td>",
                             // Suppression d'un produit dans le panier:
-                            "<td><a href='traitement.php?action=deleteProduct&id=" . $index . "'>&times;</a></td>",
+                            "<td><a id='deleteProduct' href='traitement.php?action=deleteProduct&id=" . $index . "'>&times;</a></td>",
+                            "<td><a id='deleteProduct' href='traitement.php?action=minus1&id=" . $index . "'>-</a></td>",
+                            "<td><a id='deleteProduct' href='traitement.php?action=plus1&id=" . $index . "'>+</a></td>",
                         "</tr>";
                         $totalGeneral += $product["total"];
                     }

@@ -4,6 +4,13 @@
 
     if(isset($_GET["action"])) {
 
+        // On chope l'id du produit (dans le cas ou l'action concerne un produit en particulier):
+        if(isset($_GET["id"])) {
+            $index = $_GET["id"];
+        }
+
+
+        // Actions:
         switch($_GET["action"]) {
             case "ajouterProduit":
                 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -40,16 +47,44 @@
                     header("Location:recap.php");
             break;        
 
+
             case "clearShoppingCart":
                 unset($_SESSION['product']);
                 header("Location:recap.php");
                 
             break;
 
+
+
+            // Actions sur un produit particulier:
             case "deleteProduct":
-                $index = $_GET["id"];
                 unset($_SESSION['product'][$index]);
-                
+
+                header("Location:recap.php");
+            break;
+
+
+
+            case "plus1":
+                $_SESSION['product'][$index]["quantity"] += 1;
+                // Mise à jour du total ligne:
+                $_SESSION['product'][$index]["total"] += $_SESSION['product'][$index]["unitPrice"];
+                header("Location:recap.php");
+            break;
+
+            
+
+            case "minus1":
+                // Si que 1 produit, on le supprime si -1
+                if ($_SESSION['product'][$index]["quantity"] == 1) {
+                    unset($_SESSION['product'][$index]);
+                }
+                // Sinon -1
+                else {
+                    $_SESSION['product'][$index]["quantity"] -= 1;
+                    // Mise à jour du total ligne:
+                    $_SESSION['product'][$index]["total"] -= $_SESSION['product'][$index]["unitPrice"];
+                }
                 header("Location:recap.php");
             break;
         }
