@@ -4,3 +4,61 @@
     width:70vw; 
     margin:0 auto;
 }
+
+
+.index {
+    padding: 5px 15px;
+}
+
+/* Pour permettre les border entre les lignes: */
+table { 
+    border-collapse: collapse; 
+}
+.shoppingCartLine {
+    border-top: 1px solid rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+#tableDiv {
+    padding: 10px;
+    border:3px solid rgba(0,0,0,0.2);
+    border-radius: 5px;
+    width: fit-content;
+}
+thead {
+}
+
+.buttonShoppingCart {
+    padding: 0 10px;
+    font-size: 2em;
+    border-radius: 3px;
+    text-decoration: none;
+}
+.deleteProduct {
+    margin: 0 20px;
+    background-color: rgba(255, 0, 0, 0.5);
+    transition: all 0.3s;
+}
+.minus1Product {
+    padding: 0 13px;
+    background-color: rgba(248, 112, 0, 0.5);
+    transition: all 0.3s;
+}
+.plus1Product {
+    background-color: rgba(0, 253, 135, 0.5);
+    transition: all 0.3s;
+}
+
+
+
+
+.plus1Product:hover {
+    background-color: rgba(0, 253, 135, 1);
+}
+.minus1Product:hover {
+    background-color: rgba(248, 112, 0, 1);
+}
+.deleteProduct:hover {
+    margin: 0 20px;
+    background-color: rgba(255, 0, 0, 1);
+}
+
