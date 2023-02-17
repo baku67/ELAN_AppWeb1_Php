@@ -15,8 +15,41 @@
         // Actions:
         switch($_GET["action"]) {
             case "ajouterProduit":
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    // if(isset($_POST['submit'])) {
+
+                    if(isset($_FILES['file'])){
+                        // Initialisation var:
+                        $tmpName = $_FILES['file']['tmp_name'];
+                        $name = $_FILES['file']['name'];
+                        $size = $_FILES['file']['size'];
+                        $error = $_FILES['file']['error'];
+
+                        // Récupération de l'extension du fichier:
+                        $tabExtension = explode('.', $name);
+                        $extension = strtolower(end($tabExtension));
+                        // Extensions autorisées :
+                        $extensions = ['jpg', 'png', 'jpeg', "PNG", "JPG"];
+                        // Max size: 40Mb 
+                        $maxSize = 400000;
+
+                        if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
+                            // Php ajout d'un préfixe-id généré pour éviter écrasement :
+                            list($nameClean) = explode('.', $name);
+                            $uniqueName = uniqid($nameClean, true);
+                            $fileName = $uniqueName.".".$extension;
+
+                            // Upload:
+                            move_uploaded_file($tmpName, './uploads/'.$fileName);
+                        }
+                        else{
+                            $_SESSION["success"] = "Le fichier est trop volumineux (>40Mb) ou n'est ni un PNG ni un JPG";
+                            // echo "Le fichier est trop volumineux (>40Mb)";
+                        }
+
+
+                    }
+
+                    // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                    if(isset($_POST['submit'])) {
                 
                         // En plus du *required* Front
                         if (($_POST["productName"] === null) || ($_POST["unitPrice"] === null) || ($_POST["quantity"] === null)) {
@@ -95,6 +128,12 @@
                 }
 
             break;
+
+
+            // case "uploaderImg":
+            //     $_SESSION["success"] = var_dump($_FILES);
+            //     // $_SESSION["success"] = var_dump($_POST);
+            // break;
         }
 
     } else {
