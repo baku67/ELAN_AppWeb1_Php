@@ -80,6 +80,9 @@
             
 
             case "minus1":
+                $_SESSION["success"] = "Vous avez retiré 1x " . $_SESSION['products'][$index]["productName"];
+                header("Location:recap.php");
+
                 // Si que 1 produit, on le supprime si -1
                 if ($_SESSION['products'][$index]["quantity"] == 1) {
                     unset($_SESSION['products'][$index]);
@@ -91,8 +94,6 @@
                     $_SESSION['products'][$index]["total"] -= $_SESSION['products'][$index]["unitPrice"];
                 }
 
-                $_SESSION["success"] = "Vous avez retiré 1x " . $_SESSION['products'][$index]["productName"];
-                header("Location:recap.php");
             break;
         }
 
