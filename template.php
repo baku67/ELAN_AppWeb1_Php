@@ -27,7 +27,7 @@
 
         <br><br>
 
-        <?= $msg ?>
+        <span style="color:green;"><?= $msg ?></span>
 
 
     </body>

@@ -39,13 +39,6 @@
                         ];
                         $_SESSION["products"][] = $newProduct;
                 
-                        // Test affichage d'une caractéristique du produit
-                        // echo $_SESSION["user"]["productName"] . "<br>";
-                    
-                        // echo print_r($_SESSION["user"]) . "<br><br>";
-                        // var_dump($_SESSION["user"]);
-
-                        // $msg = "Le produit a bien été ajouté au panier"
                         $_SESSION["success"] = "Le produit a bien été ajouté au panier";
                     }
                 
@@ -65,10 +58,11 @@
 
             // Actions sur un produit particulier:
             case "deleteProduct":
+                $_SESSION["success"] = "Les " . strval($_SESSION['products'][$index]["quantity"])  . " produits " . strval($_SESSION['products'][$index]["productName"]) . " ont bien été supprimé du panier";
+
                 unset($_SESSION['products'][$index]);
                 header("Location:recap.php");
 
-                $_SESSION["success"] = "Le produit a bien été supprimé du panier";
 
             break;
 

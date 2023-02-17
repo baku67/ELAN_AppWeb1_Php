@@ -60,9 +60,6 @@
 
     $content = ob_get_clean();
 
-    $msg = $_SESSION["success"];
-
-
     $title = "Panier";
 
     $onglet1 = "";

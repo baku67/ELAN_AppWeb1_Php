@@ -8,6 +8,6 @@
     }
 
 
-    // $msg = $_SESSION["success"];
+    $msg = $_SESSION["success"];
 
 
