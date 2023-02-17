@@ -18,7 +18,7 @@
             <label>Image</label>
             <input type="file" name="file">
             <br>
-            <input type="submit" value="Envoyer">
+            <input type="submit" name="submit" value="envoyer">
         </form>
         ';
 

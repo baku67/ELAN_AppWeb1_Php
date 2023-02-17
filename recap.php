@@ -18,6 +18,7 @@
                     <tr>
                         <th>#</th>
                         <th>Nom</th>
+                        <th>Image</th>
                         <th>Prix</th>
                         <th>Quantité</th>
                         <th>Total</th>
@@ -31,8 +32,9 @@
                     "<tr class='shoppingCartLine'>",
                         "<td class='index'>".$index."</td>",
                         "<td>".$product["productName"]."</td>",
+                        "<td><img src='uploads/". $product["imgPath"] ."' class='imgProduct'/></td>",
                         "<td>".number_format($product["unitPrice"], 2, ",", "&nbsp;")."&nbsp;€</td>",
-                        "<td>".$product["quantity"]."</td>",
+                        "<td><span class='productQty'>".$product["quantity"]."</span></td>",
                         "<td>".number_format($product["total"], 2, ",", "&nbsp;")."&nbsp;€</td>",
                         // Suppression d'un produit dans le panier:
                         "<td><a href='traitement.php?action=deleteProduct&id=" . $index . "' class='buttonShoppingCart deleteProduct'>&times;</a></td>",

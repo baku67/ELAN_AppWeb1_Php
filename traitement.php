@@ -14,8 +14,16 @@
 
         // Actions:
         switch($_GET["action"]) {
+
             case "ajouterProduit":
 
+
+                // if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                if(isset($_POST['submit'])) {
+
+                    $fileName = "";
+
+                    // Image pas obligatoire
                     if(isset($_FILES['file'])){
                         // Initialisation var:
                         $tmpName = $_FILES['file']['tmp_name'];
@@ -32,9 +40,9 @@
                         $maxSize = 400000;
 
                         if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
-                            // Php ajout d'un préfixe-id généré pour éviter écrasement :
-                            list($nameClean) = explode('.', $name);
-                            $uniqueName = uniqid($nameClean, true);
+                            // Php ajout d'un préfixe-id généré pour éviter écrasement ET prend le nom du produit pour le nommage :
+                            // list($nameClean) = explode('.', $_POST["productName"]);
+                            $uniqueName = uniqid($name, true);
                             $fileName = $uniqueName.".".$extension;
 
                             // Upload:
@@ -44,39 +52,29 @@
                             $_SESSION["success"] = "Le fichier est trop volumineux (>40Mb) ou n'est ni un PNG ni un JPG";
                             // echo "Le fichier est trop volumineux (>40Mb)";
                         }
-
-
                     }
 
-                    // if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    if(isset($_POST['submit'])) {
-                
-                        // En plus du *required* Front
-                        if (($_POST["productName"] === null) || ($_POST["unitPrice"] === null) || ($_POST["quantity"] === null)) {
-                            echo "Un des champ est vide";
-                        }
-                
-                        // $productName = $_POST["productName"];
-                        $productName = filter_input(INPUT_POST, "productName", FILTER_UNSAFE_RAW);
-                        // $unitPrice = $_POST["unitPrice"];
-                        $unitPrice = filter_input(INPUT_POST, "unitPrice", FILTER_VALIDATE_FLOAT);
-                        // $quantity = $_POST["quantity"];
-                        $quantity = filter_input(INPUT_POST, "quantity", FILTER_VALIDATE_INT);
-                
-                
-                        $newProduct = [
-                            "productName" => $productName,
-                            "unitPrice" => $unitPrice, 
-                            "quantity" => $quantity,
-                            "total" => ($quantity*$unitPrice)
-                        ];
-                        $_SESSION["products"][] = $newProduct;
-                
-                        $_SESSION["success"] = "Le produit a bien été ajouté au panier";
-                    }
-                
-                    header("Location:recap.php");
+                    $productName = filter_input(INPUT_POST, "productName", FILTER_UNSAFE_RAW);
+                    $unitPrice = filter_input(INPUT_POST, "unitPrice", FILTER_VALIDATE_FLOAT);
+                    $quantity = filter_input(INPUT_POST, "quantity", FILTER_VALIDATE_INT);
+            
+                    $newProduct = [
+                        "productName" => $productName,
+                        "unitPrice" => $unitPrice, 
+                        "quantity" => $quantity,
+                        "total" => ($quantity*$unitPrice),
+                        // "imgPath" =>  "63ef5e103a9a4058517770.png"
+                        "imgPath" =>  $fileName
+                    ];
+                    $_SESSION["products"][] = $newProduct;
+            
+                    $_SESSION["success"] = "Le produit a bien été ajouté au panier";
+                }
+            
+                header("Location:recap.php");
             break;        
+
+
 
 
             case "clearShoppingCart":
@@ -84,7 +82,6 @@
                 header("Location:recap.php");
 
                 $_SESSION["success"] = "Le panier a bien été vidé";
-                
             break;
 
 
@@ -95,8 +92,6 @@
 
                 unset($_SESSION['products'][$index]);
                 header("Location:recap.php");
-
-
             break;
 
 
@@ -126,7 +121,6 @@
                     // Mise à jour du total ligne:
                     $_SESSION['products'][$index]["total"] -= $_SESSION['products'][$index]["unitPrice"];
                 }
-
             break;
 
 
