@@ -2,6 +2,8 @@
 
     session_start();
 
+    $_SESSION["success"] = "";
+
     if(isset($_GET["action"])) {
 
         // On chope l'id du produit (dans le cas ou l'action concerne un produit en particulier):
@@ -35,13 +37,16 @@
                             "quantity" => $quantity,
                             "total" => ($quantity*$unitPrice)
                         ];
-                        $_SESSION["product"][] = $newProduct;
+                        $_SESSION["products"][] = $newProduct;
                 
                         // Test affichage d'une caractéristique du produit
                         // echo $_SESSION["user"]["productName"] . "<br>";
                     
                         // echo print_r($_SESSION["user"]) . "<br><br>";
                         // var_dump($_SESSION["user"]);
+
+                        // $msg = "Le produit a bien été ajouté au panier"
+                        $_SESSION["success"] = "Le produit a bien été ajouté au panier";
                     }
                 
                     header("Location:recap.php");
@@ -49,8 +54,10 @@
 
 
             case "clearShoppingCart":
-                unset($_SESSION['product']);
+                unset($_SESSION['products']);
                 header("Location:recap.php");
+
+                $_SESSION["success"] = "Le panier a bien été vidé";
                 
             break;
 
@@ -58,17 +65,21 @@
 
             // Actions sur un produit particulier:
             case "deleteProduct":
-                unset($_SESSION['product'][$index]);
-
+                unset($_SESSION['products'][$index]);
                 header("Location:recap.php");
+
+                $_SESSION["success"] = "Le produit a bien été supprimé du panier";
+
             break;
 
 
 
             case "plus1":
-                $_SESSION['product'][$index]["quantity"] += 1;
+                $_SESSION['products'][$index]["quantity"] += 1;
                 // Mise à jour du total ligne:
-                $_SESSION['product'][$index]["total"] += $_SESSION['product'][$index]["unitPrice"];
+                $_SESSION['products'][$index]["total"] += $_SESSION['products'][$index]["unitPrice"];
+
+                $_SESSION["success"] = "Vous avez ajouté 1x " . $_SESSION['products'][$index]["productName"];
                 header("Location:recap.php");
             break;
 
@@ -76,15 +87,17 @@
 
             case "minus1":
                 // Si que 1 produit, on le supprime si -1
-                if ($_SESSION['product'][$index]["quantity"] == 1) {
-                    unset($_SESSION['product'][$index]);
+                if ($_SESSION['products'][$index]["quantity"] == 1) {
+                    unset($_SESSION['products'][$index]);
                 }
                 // Sinon -1
                 else {
-                    $_SESSION['product'][$index]["quantity"] -= 1;
+                    $_SESSION['products'][$index]["quantity"] -= 1;
                     // Mise à jour du total ligne:
-                    $_SESSION['product'][$index]["total"] -= $_SESSION['product'][$index]["unitPrice"];
+                    $_SESSION['products'][$index]["total"] -= $_SESSION['products'][$index]["unitPrice"];
                 }
+
+                $_SESSION["success"] = "Vous avez retiré 1x " . $_SESSION['products'][$index]["productName"];
                 header("Location:recap.php");
             break;
         }

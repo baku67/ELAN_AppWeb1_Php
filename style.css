@@ -110,3 +110,13 @@ thead {
     background-color: rgba(255, 0, 0, 1);
 }
 
+
+
+#nbrOfProducts {
+    padding: 1px 7px;
+    margin: 0px 0px 0px 12px;
+    background-color: #c61c1c;
+    border-radius: 4px;
+    color: aliceblue;
+    font-weight: bold;
+}

@@ -4,9 +4,11 @@
 <?php
     session_start();
 
+
+
     ob_start();
 
-        if (!isset($_SESSION["product"]) || empty($_SESSION["product"])) {
+        if (!isset($_SESSION["products"]) || empty($_SESSION["products"])) {
             echo "<p>Aucun produit en session...</p>";
         }
         else {
@@ -24,7 +26,7 @@
                 <tbody>";
 
                 $totalGeneral = 0;
-                foreach ($_SESSION["product"] as $index => $product) {
+                foreach ($_SESSION["products"] as $index => $product) {
                     echo 
                     "<tr class='shoppingCartLine'>",
                         "<td class='index'>".$index."</td>",
@@ -57,6 +59,8 @@
 
 
     $content = ob_get_clean();
+
+    $msg = $_SESSION["success"];
 
 
     $title = "Panier";
